@@ -1,0 +1,16 @@
+{
+  "name": "QuickCourt",
+  "short_name": "QuickCourt",
+  "description": "Real-time sports court discovery & booking platform",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "icons": [
+    {
+      "src": "/placeholder.svg",
+      "sizes": "256x256",
+      "type": "image/svg+xml"
+    }
+  ]
+}
