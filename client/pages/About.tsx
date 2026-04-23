@@ -31,7 +31,7 @@ const milestones = [
 const About: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50 pb-16">
-      <SEO title="About QuickCourt" description="Learn about QuickCourt's mission and platform" path="/about" />
+      <SEO title="About SwiftCourt" description="Learn about SwiftCourt's mission and platform" path="/about" />
       {/* Hero */}
       <section className="relative">
         <div className="max-w-6xl mx-auto px-4 pt-10 md:pt-16">
@@ -41,7 +41,7 @@ const About: React.FC = () => {
                 Play. Improve. Belong.
               </motion.h1>
               <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15, duration: 0.6 }} className="mt-6 text-gray-600 text-lg leading-relaxed">
-                QuickCourt is building the connective tissue for local sports. We help players discover courts, owners manage facilities, and communities grow through smart scheduling, gamification, and delightful user experience.
+                SwiftCourt is building the connective tissue for local sports. We help players discover courts, owners manage facilities, and communities grow through smart scheduling, gamification, and delightful user experience.
               </motion.p>
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }} className="mt-8 flex flex-wrap gap-4">
                 <Button asChild className="bg-green-600 hover:bg-green-700">
@@ -53,7 +53,7 @@ const About: React.FC = () => {
               </motion.div>
             </div>
             <div className="order-first lg:order-last">
-              <ImageCarousel images={heroImages} venueName="About QuickCourt" />
+              <ImageCarousel images={heroImages} venueName="About SwiftCourt" />
             </div>
           </div>
         </div>

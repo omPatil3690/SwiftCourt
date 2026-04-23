@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.signupHandler = signupHandler;
-exports.verifyOtpHandler = verifyOtpHandler;
 exports.loginHandler = loginHandler;
 exports.refreshHandler = refreshHandler;
 exports.logoutHandler = logoutHandler;
@@ -26,18 +25,7 @@ async function signupHandler(req, res) {
         }
         const { inviteSecret, ...rest } = data;
         const out = await (0, auth_service_js_1.registerUser)(rest); // cast due to zod unknown -> any
-        res.status(201).json({ message: 'User created. Verify OTP sent to email.', ...out });
-    }
-    catch (e) {
-        res.status(400).json({ message: e.message });
-    }
-}
-async function verifyOtpHandler(req, res) {
-    const schema = zod_1.z.object({ userId: zod_1.z.string(), otp: zod_1.z.string().length(6) });
-    try {
-        const { userId, otp } = schema.parse(req.body);
-        await (0, auth_service_js_1.verifyOtp)(userId, otp);
-        res.json({ message: 'Verification successful' });
+        res.status(201).json({ message: 'User created.', ...out });
     }
     catch (e) {
         res.status(400).json({ message: e.message });

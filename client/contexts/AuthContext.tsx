@@ -10,10 +10,9 @@ interface AuthContextType {
     email: string;
     password: string;
     fullName: string;
-    role: 'USER' | 'OWNER' | 'ADMIN';
+  role: 'USER' | 'OWNER' | 'ADMIN';
   inviteSecret?: string;
   }) => Promise<{ userId: string }>;
-  verifyOtp: (userId: string, otp: string) => Promise<void>;
   logout: () => void;
   isAuthenticated: boolean;
 }
@@ -96,7 +95,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       
       toast({
         title: 'Account created!',
-        description: 'Please check your email for the verification code.',
+        description: 'Your account is ready. Please sign in.',
       });
       
       return response;
@@ -105,24 +104,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         variant: 'destructive',
         title: 'Signup failed',
         description: error.message || 'Please try again.',
-      });
-      throw error;
-    }
-  };
-
-  const verifyOtp = async (userId: string, otp: string) => {
-    try {
-      await authApi.verifyOtp({ userId, otp });
-      
-      toast({
-        title: 'Email verified!',
-        description: 'Your account has been successfully verified.',
-      });
-    } catch (error: any) {
-      toast({
-        variant: 'destructive',
-        title: 'Verification failed',
-        description: error.message || 'Please check your verification code.',
       });
       throw error;
     }
@@ -154,7 +135,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     isLoading,
     login,
     signup,
-    verifyOtp,
     logout,
     isAuthenticated: !!user,
   };

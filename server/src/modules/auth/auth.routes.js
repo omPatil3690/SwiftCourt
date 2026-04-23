@@ -6,7 +6,6 @@ const rateLimit_js_1 = require("../../middleware/rateLimit.js");
 const auth_controller_js_1 = require("./auth.controller.js");
 exports.authRouter = (0, express_1.Router)();
 exports.authRouter.post('/signup', rateLimit_js_1.authLimiter, auth_controller_js_1.signupHandler);
-exports.authRouter.post('/verify-otp', rateLimit_js_1.authLimiter, auth_controller_js_1.verifyOtpHandler);
 exports.authRouter.post('/login', rateLimit_js_1.authLimiter, auth_controller_js_1.loginHandler);
 exports.authRouter.post('/refresh', auth_controller_js_1.refreshHandler);
 exports.authRouter.post('/logout', auth_controller_js_1.logoutHandler);

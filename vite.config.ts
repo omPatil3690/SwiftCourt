@@ -9,6 +9,7 @@ export default defineConfig(({ mode }) => ({
 		host: "::",
 		port: 8080,
 	},
+	publicDir: "client/public",
 	plugins: [
 		react(),
 		VitePWA({
@@ -16,8 +17,8 @@ export default defineConfig(({ mode }) => ({
 			injectRegister: 'auto',
 			includeAssets: ['favicon.svg', 'robots.txt'],
 			manifest: {
-				name: 'QuickCourt',
-				short_name: 'QuickCourt',
+				name: 'SwiftCourt',
+				short_name: 'SwiftCourt',
 				description: 'Real-time sports court booking',
 				theme_color: '#0ea5e9',
 				background_color: '#ffffff',
@@ -49,7 +50,7 @@ export default defineConfig(({ mode }) => ({
 	],
 	resolve: {
 		alias: {
-			"@": path.resolve(__dirname, "."),
+			"@": path.resolve(__dirname, "./client"),
 		},
 	},
 }));

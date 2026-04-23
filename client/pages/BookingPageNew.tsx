@@ -372,7 +372,7 @@ const BookingPageNew: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <SEO 
-        title={`Book ${bookingDetails.facilityName} - QuickCourt`}
+        title={`Book ${bookingDetails.facilityName} - SwiftCourt`}
         description={`Complete your booking for ${bookingDetails.courtName} at ${bookingDetails.facilityName}`}
       />
       

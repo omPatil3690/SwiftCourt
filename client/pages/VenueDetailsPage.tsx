@@ -556,7 +556,7 @@ const VenueDetailsPage = () => {
   return (
     <div className="min-h-screen bg-green-50">
       <SEO
-        title={`${venue.name} - Book Sports Courts | QuickCourt`}
+        title={`${venue.name} - Book Sports Courts | SwiftCourt`}
         description={`Book courts at ${venue.name} in ${venue.location}. ${venue.description.substring(0, 150)}...`}
         keywords={`${venue.name}, sports booking, ${venue.sports.map(s => s.name).join(', ')}, ${venue.location}`}
       />

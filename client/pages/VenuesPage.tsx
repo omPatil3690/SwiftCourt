@@ -266,7 +266,7 @@ const VenuesPage = () => {
   return (
     <div className="min-h-screen bg-gray-50 pt-[72px]">
       <SEO 
-        title={`${pageContext.title} - QuickCourt`}
+        title={`${pageContext.title} - SwiftCourt`}
         description={`${pageContext.subtitle}. Filter by sport, location, price and more.`}
       />
       

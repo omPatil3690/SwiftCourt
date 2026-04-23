@@ -1,5 +1,7 @@
-// Resolve API base dynamically: Vercel / Netlify etc. can inject VITE_API_BASE_URL
-export const API_BASE_URL = (import.meta as any).env?.VITE_API_BASE_URL || 'https://quick-court-hlmu.vercel.app';
+// Prefer an explicit env var, otherwise default to the local API in development.
+export const API_BASE_URL =
+  (import.meta as any).env?.VITE_API_BASE_URL ||
+  (import.meta.env.DEV ? 'http://localhost:4000' : 'https://quick-court-hlmu.vercel.app');
 
 // API utility functions
 export class ApiError extends Error {
@@ -93,12 +95,6 @@ export const authApi = {
     method: 'POST',
     body: JSON.stringify(data),
   }),
-
-  verifyOtp: (data: { userId: string; otp: string }) =>
-    apiRequest('/auth/verify-otp', {
-      method: 'POST',
-      body: JSON.stringify(data),
-    }),
 
   login: (data: { email: string; password: string }) =>
     apiRequest<{ accessToken: string; refreshToken: string }>('/auth/login', {

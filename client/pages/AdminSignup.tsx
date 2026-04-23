@@ -7,7 +7,6 @@ import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { useAuth } from '../contexts/AuthContext';
 import SEO from '../components/SEO';
-import OtpVerification from '../components/OtpVerification';
 
 // Dedicated Admin Signup page (role fixed to ADMIN)
 const AdminSignup = () => {
@@ -18,7 +17,6 @@ const AdminSignup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [userId, setUserId] = useState<string | null>(null);
   const [inviteSecret, setInviteSecret] = useState('');
   const [avatar, setAvatar] = useState<File | null>(null); // reserved for future avatar upload integration
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
@@ -58,29 +56,18 @@ const AdminSignup = () => {
     if (password.length < 8) return;
     setIsLoading(true);
     try {
-  const result = await signup({ email, password, fullName, role: 'ADMIN', inviteSecret });
-      setUserId(result.userId);
+      await signup({ email, password, fullName, role: 'ADMIN', inviteSecret });
+      navigate('/login?role=admin', {
+        state: { message: 'Admin account created successfully. Please sign in.' },
+      });
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleOtpVerified = () => {
-    navigate('/login?role=admin', { state: { message: 'Admin account verified. Please login.' } });
-  };
-
-  if (userId) {
-    return (
-      <>
-        <SEO title="Verify Admin Email - QuickCourt" description="Verify your admin email" path="/admin/signup" />
-        <OtpVerification userId={userId} email={email} userRole="ADMIN" isLoginFlow={false} onVerified={handleOtpVerified} />
-      </>
-    );
-  }
-
   return (
     <div className="min-h-screen bg-gray-50 flex">
-      <SEO title="Admin Sign Up - QuickCourt" description="Create an administrator account" path="/admin/signup" />
+      <SEO title="Admin Sign Up - SwiftCourt" description="Create an administrator account" path="/admin/signup" />
       {/* Left side banner */}
       <motion.div className="hidden lg:flex lg:w-1/2 relative overflow-hidden" initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}>
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?auto=format&fit=crop&w=2340&q=80')" }} />

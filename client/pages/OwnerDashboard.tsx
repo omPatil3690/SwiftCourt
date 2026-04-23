@@ -234,7 +234,7 @@ const OwnerDashboard: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
-      <SEO title="Owner Dashboard - QuickCourt" description="Manage your sports facilities and venues" />
+      <SEO title="Owner Dashboard - SwiftCourt" description="Manage your sports facilities and venues" />
       <BrandNav />
       
       <div className="container mx-auto px-4 pt-24 pb-8">

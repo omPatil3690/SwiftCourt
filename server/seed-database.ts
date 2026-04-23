@@ -23,10 +23,10 @@ async function seedDatabase() {
     const passwordHash = simpleHash('testowner123');
     
     const testOwner = await prisma.user.upsert({
-      where: { email: 'owner@quickcourt.com' },
+      where: { email: 'owner@swiftcourt.com' },
       update: {},
       create: {
-        email: 'owner@quickcourt.com',
+        email: 'owner@swiftcourt.com',
         passwordHash,
         fullName: 'Test Owner',
         role: 'OWNER',

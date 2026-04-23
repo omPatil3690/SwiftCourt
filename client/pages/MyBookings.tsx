@@ -196,7 +196,7 @@ const MyBookings = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <SEO title="My Bookings - QuickCourt" description="View and manage your court bookings" path="/my-bookings" />
+      <SEO title="My Bookings - SwiftCourt" description="View and manage your court bookings" path="/my-bookings" />
       <BrandNav />
       
       <main className="container mx-auto px-4 pt-24 pb-8 max-w-4xl">

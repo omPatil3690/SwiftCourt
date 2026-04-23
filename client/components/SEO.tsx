@@ -7,7 +7,7 @@ type SEOProps = {
   path?: string;
 };
 
-const SEO = ({ title, description = "Book local sports courts in real-time with QuickCourt.", keywords, path = "/" }: SEOProps) => (
+const SEO = ({ title, description = "Book local sports courts in real-time with SwiftCourt.", keywords, path = "/" }: SEOProps) => (
   <Helmet>
     <title>{title}</title>
     {description && <meta name="description" content={description} />}

@@ -56,7 +56,7 @@ const BrandNav = () => {
         logoColor: 'text-white drop-shadow-lg',
   buttonStyle: 'text-white hover:bg-white/25 focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:outline-none',
   navBackground: 'bg-white/10 backdrop-blur-sm border-white/25',
-  loginButton: 'bg-brand text-brand-foreground hover:brightness-110 shadow-[var(--shadow-elegant)] focus-visible:ring-2 focus-visible:ring-[hsl(var(--brand-2)/0.6)]'
+  loginButton: 'bg-white text-black hover:bg-brand hover:text-white transition-colors duration-300 shadow-[var(--shadow-elegant)] focus-visible:ring-2 focus-visible:ring-brand/70'
       };
     } else {
       // Past hero section or non-hero pages - white background with dark text
@@ -66,7 +66,7 @@ const BrandNav = () => {
         logoColor: 'text-green-600',
   buttonStyle: 'text-gray-700 hover:bg-gray-100 focus-visible:ring-2 focus-visible:ring-[hsl(var(--brand))] focus-visible:outline-none',
   navBackground: 'bg-gray-50/80 backdrop-blur-sm border-gray-200',
-  loginButton: 'bg-brand text-brand-foreground hover:brightness-110 shadow-[var(--shadow-elegant)] focus-visible:ring-2 focus-visible:ring-[hsl(var(--brand-2)/0.55)]'
+  loginButton: 'bg-white text-black hover:bg-brand hover:text-white transition-colors duration-300 shadow-[var(--shadow-elegant)] focus-visible:ring-2 focus-visible:ring-brand/70'
       };
     }
   };
@@ -89,7 +89,7 @@ const BrandNav = () => {
                 ? 'bg-white/20 backdrop-blur-sm text-white border border-white/30'
                 : 'bg-gradient-to-br from-green-600 to-emerald-500 text-white shadow-md'
             }`}>QC</span>
-            <span>QuickCourt</span>
+            <span>SwiftCourt</span>
           </Link>
         </div>
         
@@ -275,7 +275,7 @@ const BrandNav = () => {
               <div className="mt-4 mb-4 flex items-center justify-between">
                 <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2">
                   <span className="inline-grid place-items-center w-8 h-8 rounded-md bg-gradient-to-br from-green-600 to-emerald-500 text-white text-sm font-bold shadow-md">QC</span>
-                  <span className="font-semibold text-gray-900">QuickCourt</span>
+                  <span className="font-semibold text-gray-900">SwiftCourt</span>
                 </Link>
                 <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(false)} aria-label="Close menu">
                   <X className="h-5 w-5" />

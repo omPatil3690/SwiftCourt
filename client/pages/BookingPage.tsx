@@ -75,7 +75,7 @@ const BookingPage = () => {
   if (!timeFromSlot) {
     return (
       <div className="min-h-screen bg-background">
-        <SEO title="Book Court - QuickCourt" description="Complete your court booking" />
+        <SEO title="Book Court - SwiftCourt" description="Complete your court booking" />
         <BrandNav />
         <div className="container mx-auto px-4 pt-24 pb-8">
           <Card className="max-w-xl mx-auto">
@@ -94,7 +94,7 @@ const BookingPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <SEO title="Confirm Booking - QuickCourt" description="Review and confirm your court booking" />
+      <SEO title="Confirm Booking - SwiftCourt" description="Review and confirm your court booking" />
       <BrandNav />
 
       <div className="container mx-auto px-4 pt-24 pb-8 max-w-3xl">

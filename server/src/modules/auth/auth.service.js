@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.registerUser = registerUser;
-exports.verifyOtp = verifyOtp;
 exports.login = login;
 exports.rotateRefreshToken = rotateRefreshToken;
 exports.logout = logout;
@@ -16,23 +15,8 @@ async function registerUser(params) {
         throw new Error('Email already registered');
     const passwordHash = await (0, hash_js_1.hashPassword)(params.password);
     const user = await prisma.user.create({ data: { email: params.email, passwordHash, fullName: params.fullName, role: params.role, avatarUrl: params.avatarUrl } });
-    const otp = (0, hash_js_1.generateOtp)();
-    const otpHash = (0, hash_js_1.sha256)(otp);
-    const expiresAt = new Date(Date.now() + env_js_1.env.otpTtlMinutes * 60 * 1000);
-    await prisma.verificationToken.create({ data: { userId: user.id, otpHash, expiresAt } });
-    console.log(`[OTP] for ${user.email}: ${otp}`);
+    // OTP logic removed
     return { userId: user.id };
-}
-async function verifyOtp(userId, otp) {
-    const token = await prisma.verificationToken.findFirst({ where: { userId, usedAt: null }, orderBy: { createdAt: 'desc' } });
-    if (!token)
-        throw new Error('No verification token');
-    if (token.expiresAt < new Date())
-        throw new Error('OTP expired');
-    if (token.otpHash !== (0, hash_js_1.sha256)(otp))
-        throw new Error('Invalid OTP');
-    await prisma.verificationToken.update({ where: { id: token.id }, data: { usedAt: new Date() } });
-    return { success: true };
 }
 async function login(email, password) {
     const user = await prisma.user.findUnique({ where: { email } });

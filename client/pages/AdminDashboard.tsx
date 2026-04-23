@@ -231,8 +231,8 @@ const AdminDashboard = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <SEO 
-        title="Admin Dashboard - QuickCourt"
-        description="Manage facilities, users, and bookings on QuickCourt"
+        title="Admin Dashboard - SwiftCourt"
+        description="Manage facilities, users, and bookings on SwiftCourt"
       />
       <BrandNav />
       

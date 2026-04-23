@@ -13,7 +13,7 @@ const Footer = () => {
             <div className="w-8 h-8 rounded-md bg-gradient-to-br from-green-600 to-emerald-500 text-white grid place-items-center text-sm font-bold">
               QC
             </div>
-            <span className="font-semibold">QuickCourt</span>
+            <span className="font-semibold">SwiftCourt</span>
           </Link>
 
           {/* Minimal Links */}
@@ -34,7 +34,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-4 text-xs text-muted-foreground">
-          © {year} QuickCourt. All rights reserved.
+          © {year} SwiftCourt. All rights reserved.
         </div>
       </div>
     </footer>

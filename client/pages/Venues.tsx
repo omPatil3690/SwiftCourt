@@ -210,7 +210,7 @@ const Venues = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-background pt-[72px]">
-        <SEO title="Sports Venues - QuickCourt" description="Find and book sports facilities near you" />
+        <SEO title="Sports Venues - SwiftCourt" description="Find and book sports facilities near you" />
         <BrandNav />
         <div className="container mx-auto px-4 py-8">
           <div className="flex items-center justify-center min-h-[400px]">
@@ -228,7 +228,7 @@ const Venues = () => {
   if (error) {
     return (
       <div className="min-h-screen bg-background pt-[72px]">
-        <SEO title="Sports Venues - QuickCourt" description="Find and book sports facilities near you" />
+        <SEO title="Sports Venues - SwiftCourt" description="Find and book sports facilities near you" />
         <BrandNav />
         <div className="container mx-auto px-4 py-8">
           <div className="flex items-center justify-center min-h-[400px]">
@@ -246,7 +246,7 @@ const Venues = () => {
   if (!venues || venues.length === 0) {
     return (
       <div className="min-h-screen bg-background pt-[72px]">
-        <SEO title="Sports Venues - QuickCourt" description="Find and book sports facilities near you" />
+        <SEO title="Sports Venues - SwiftCourt" description="Find and book sports facilities near you" />
         <BrandNav />
         <div className="container mx-auto px-4 py-8">
           <div className="flex items-center justify-center min-h-[400px]">
@@ -267,7 +267,7 @@ const Venues = () => {
 
   return (
     <div className="min-h-screen bg-background pt-[72px]">
-      <SEO title="Find Sports Venues – QuickCourt" description="Browse all nearby sports facilities and check live availability." path="/venues" />
+      <SEO title="Find Sports Venues – SwiftCourt" description="Browse all nearby sports facilities and check live availability." path="/venues" />
       <BrandNav />
       
       <main className="container mx-auto px-4 py-6 sm:py-8 md:py-10">

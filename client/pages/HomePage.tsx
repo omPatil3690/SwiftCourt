@@ -210,7 +210,7 @@ const HomePage = () => {
   return (
     <div className="min-h-screen bg-white">
       <SEO 
-        title="QuickCourt - Book Sports Facilities Near You"
+        title="SwiftCourt - Book Sports Facilities Near You"
         description="Choose a sport, find a court, and start playing. Book badminton, tennis, football and more courts instantly."
       />
       
@@ -551,7 +551,7 @@ const HomePage = () => {
         <div className="container mx-auto px-4 max-w-6xl">
           <motion.div {...fadeInUp} className="text-center max-w-3xl mx-auto mb-12">
             <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight bg-gradient-to-br from-green-600 to-emerald-500 bg-clip-text text-transparent">
-              About QuickCourt
+              About SwiftCourt
             </h2>
             <p className="mt-4 text-gray-600 text-lg leading-relaxed">
               We connect players, facility owners and coaches through seamless booking, real-time availability and a rewarding activity ecosystem.
@@ -610,7 +610,7 @@ const HomePage = () => {
                 <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_30%_30%,white,transparent_60%)]" />
                 <div className="relative z-10 space-y-4">
                   <h3 className="text-xl font-semibold">Why It Matters</h3>
-                  <p className="text-sm leading-relaxed text-green-50">Access, consistency, and community are the pillars that keep people active. QuickCourt lowers friction while boosting motivation and trust.</p>
+                  <p className="text-sm leading-relaxed text-green-50">Access, consistency, and community are the pillars that keep people active. SwiftCourt lowers friction while boosting motivation and trust.</p>
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div>
                       <p className="font-bold text-white">01</p>

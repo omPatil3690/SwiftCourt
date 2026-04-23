@@ -1,41 +1,41 @@
-import { Toaster } from "./components/ui/toaster";
-import { Toaster as Sonner } from "./components/ui/sonner";
-import { TooltipProvider } from "./components/ui/tooltip";
+import { Toaster } from "./client/components/ui/toaster";
+import { Toaster as Sonner } from "./client/components/ui/sonner";
+import { TooltipProvider } from "./client/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import React from 'react';
 
 // Contexts
-import { AuthProvider } from "./contexts/AuthContext";
-import { ThemeProvider } from "./contexts/ThemeContext";
+import { AuthProvider } from "./client/contexts/AuthContext";
+import { ThemeProvider } from "./client/contexts/ThemeContext";
 
 // Components
-import Footer from "./components/Footer";
-import ProtectedRoute from "./components/ProtectedRoute";
+import Footer from "./client/components/Footer";
+import ProtectedRoute from "./client/components/ProtectedRoute";
 
 // Pages
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-import Venues from "./pages/Venues";
-import VenuesPage from "./pages/VenuesPage";
-import VenueDetailsPage from "./pages/VenueDetailsPage";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-import OtpLogin from "./pages/OtpLogin";
+import Index from "./client/pages/Index";
+import NotFound from "./client/pages/NotFound";
+import Venues from "./client/pages/Venues";
+import VenuesPage from "./client/pages/VenuesPage";
+import VenueDetailsPage from "./client/pages/VenueDetailsPage";
+import Login from "./client/pages/Login";
+import Signup from "./client/pages/Signup";
+import OtpLogin from "./client/pages/OtpLogin";
 // If the file is named differently, update the import path accordingly, e.g.:
 // import Login from "./pages/LoginPage";
 // import Login from "./pages/login";
 // import Signup from "./pages/Signup";
-import ForgotPassword from "./pages/ForgotPassword";
-import ResetPassword from "./pages/ResetPassword";
-import Profile from "./pages/Profile";
-import MyBookings from "./pages/MyBookings";
-import BookingPageNew from "./pages/BookingPageNew";
-import AdminDashboard from "./pages/AdminDashboard";
-import OwnerDashboard from "./pages/OwnerDashboard";
-import AdminSignup from "./pages/AdminSignup";
-import About from "./pages/About";
+import ForgotPassword from "./client/pages/ForgotPassword";
+import ResetPassword from "./client/pages/ResetPassword";
+import Profile from "./client/pages/Profile";
+import MyBookings from "./client/pages/MyBookings";
+import BookingPageNew from "./client/pages/BookingPageNew";
+import AdminDashboard from "./client/pages/AdminDashboard";
+import OwnerDashboard from "./client/pages/OwnerDashboard";
+import AdminSignup from "./client/pages/AdminSignup";
+import About from "./client/pages/About";
 
 const queryClient = new QueryClient();
 

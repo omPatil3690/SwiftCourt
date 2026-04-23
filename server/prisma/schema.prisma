@@ -1,4 +1,4 @@
-// QuickCourt Prisma schema
+// SwiftCourt Prisma schema
 // PostgreSQL database
 datasource db {
   provider = "postgresql"

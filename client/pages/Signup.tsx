@@ -8,7 +8,6 @@ import { Label } from '../components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { useAuth } from '../contexts/AuthContext';
 import SEO from '../components/SEO';
-import OtpVerification from '../components/OtpVerification';
 
 const Signup = () => {
   const [email, setEmail] = useState('');
@@ -19,7 +18,6 @@ const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [userId, setUserId] = useState<string | null>(null);
   const [avatar, setAvatar] = useState<File | null>(null);
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -91,8 +89,10 @@ const Signup = () => {
 
     setIsLoading(true);
     try {
-      const result = await signup({ email, password, fullName, role });
-      setUserId(result.userId);
+      await signup({ email, password, fullName, role });
+      navigate('/login', {
+        state: { message: 'Account created successfully. Please sign in.' },
+      });
     } catch (error) {
       // Error is handled by the auth context
     } finally {
@@ -100,30 +100,9 @@ const Signup = () => {
     }
   };
 
-  const handleOtpVerified = () => {
-    navigate('/login', { 
-      state: { message: 'Account verified successfully. Please login.' }
-    });
-  };
-
-  if (userId) {
-    return (
-      <>
-        <SEO title="Verify Email - QuickCourt" description="Verify your email address" path="/signup" />
-        <OtpVerification 
-          userId={userId} 
-          email={email}
-          userRole={role}
-          isLoginFlow={false}
-          onVerified={handleOtpVerified} 
-        />
-      </>
-    );
-  }
-
   return (
     <div className="min-h-screen bg-gray-50 flex">
-      <SEO title="Sign Up - QuickCourt" description="Create your QuickCourt account" path="/signup" />
+      <SEO title="Sign Up - SwiftCourt" description="Create your SwiftCourt account" path="/signup" />
       
       {/* Left Column - Background Image (Desktop Only) */}
       <motion.div 
@@ -201,7 +180,7 @@ const Signup = () => {
               </motion.div>
 
               <h1 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">
-                Join QuickCourt
+                Join SwiftCourt
               </h1>
               <p className="text-gray-500 text-sm sm:text-base">
                 Book, manage, and enjoy sports effortlessly.

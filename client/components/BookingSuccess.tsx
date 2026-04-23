@@ -75,7 +75,7 @@ const BookingSuccess: React.FC<BookingSuccessProps> = ({
     if (navigator.share) {
       try {
         await navigator.share({
-          title: 'QuickCourt Booking Confirmed',
+          title: 'SwiftCourt Booking Confirmed',
           text: bookingText,
         });
       } catch (error) {
@@ -130,7 +130,7 @@ const BookingSuccess: React.FC<BookingSuccessProps> = ({
     const html = `
       <html>
       <head>
-        <title>Receipt - QuickCourt</title>
+        <title>Receipt - SwiftCourt</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <style>
           :root{ --green:#065f46; --muted:#6b7280; --border:#e5e7eb; --bg:#ffffff; }
@@ -169,7 +169,7 @@ const BookingSuccess: React.FC<BookingSuccessProps> = ({
           <div class="header">
             <div class="brand">
               <div class="logo">QC</div>
-              <div class="brand-text">QuickCourt</div>
+              <div class="brand-text">SwiftCourt</div>
             </div>
             <div class="receipt-meta">
               <div>Receipt No: <strong>${bookingData.receiptId}</strong></div>
@@ -222,8 +222,8 @@ const BookingSuccess: React.FC<BookingSuccessProps> = ({
           </div>
 
           <div class="footer">
-            <div class="note">Thank you for booking with QuickCourt. Please arrive 10 minutes early. For changes or cancellations, see your booking details in the app.</div>
-            <div>quickcourt.example • support@quickcourt.example</div>
+            <div class="note">Thank you for booking with SwiftCourt. Please arrive 10 minutes early. For changes or cancellations, see your booking details in the app.</div>
+            <div>swiftcourt.example • support@swiftcourt.example</div>
           </div>
         </div>
         <script>
@@ -268,7 +268,7 @@ const BookingSuccess: React.FC<BookingSuccessProps> = ({
       const html = `<!DOCTYPE html>
         <html>
         <head>
-          <title>Receipt - QuickCourt</title>
+          <title>Receipt - SwiftCourt</title>
           <meta charset="UTF-8">
           <style>
             body { font-family: Arial, sans-serif; margin: 20px; background: white; }
@@ -281,7 +281,7 @@ const BookingSuccess: React.FC<BookingSuccessProps> = ({
         <body>
           <div class="receipt">
             <div class="header">
-              <h1>QuickCourt Receipt</h1>
+              <h1>SwiftCourt Receipt</h1>
               <p>Booking ID: ${bookingData.id.slice(-8).toUpperCase()}</p>
             </div>
             <div class="details">
@@ -302,7 +302,7 @@ const BookingSuccess: React.FC<BookingSuccessProps> = ({
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `QuickCourt-Receipt-${bookingData.id.slice(-8)}.html`;
+      a.download = `SwiftCourt-Receipt-${bookingData.id.slice(-8)}.html`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -334,7 +334,7 @@ const BookingSuccess: React.FC<BookingSuccessProps> = ({
 
     const receiptContent = `
 ╔══════════════════════════════════════════════════════════════╗
-║                    🏸 QUICKCOURT RECEIPT                     ║
+║                    🏸 SWIFTCOURT RECEIPT                     ║
 ╚══════════════════════════════════════════════════════════════╝
 
 Receipt ID: ${bookingData.receiptId}
@@ -370,9 +370,9 @@ TOTAL PAID                                            ${currency(price)}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Thank you for choosing QuickCourt!
-🌐 Visit us at: quickcourt.com
-📧 Support: support@quickcourt.com
+Thank you for choosing SwiftCourt!
+🌐 Visit us at: swiftcourt.com
+📧 Support: support@swiftcourt.com
 📱 Download our app for easy bookings
 
 This is an electronic receipt. Please save for your records.
@@ -382,7 +382,7 @@ This is an electronic receipt. Please save for your records.
     const url = window.URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `QuickCourt_Receipt_${bookingData.receiptId}_${new Date().toISOString().split('T')[0]}.txt`;
+      a.download = `SwiftCourt_Receipt_${bookingData.receiptId}_${new Date().toISOString().split('T')[0]}.txt`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

@@ -129,7 +129,7 @@ export const useRazorpayPayment = () => {
         amount: orderData.amount,
         currency: orderData.currency,
         order_id: orderData.orderId,
-        name: 'QuickCourt',
+        name: 'SwiftCourt',
         description: `Booking for ${options.facilityName} - ${options.courtName}`,
         image: '/logo.png', // Your logo URL
         prefill: {

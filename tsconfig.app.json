@@ -23,8 +23,8 @@
 
 		"baseUrl": ".",
 		"paths": {
-			"@/*": ["./src/*"]
+			"@/*": ["./client/*"]
 		}
 	},
-	"include": ["src"]
+	"include": ["App.tsx", "main.tsx", "client/**/*.ts", "client/**/*.tsx", "vite-env.d.ts"]
 }

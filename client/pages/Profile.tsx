@@ -323,7 +323,7 @@ const Profile = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <SEO title="Profile - QuickCourt" description="Manage your QuickCourt profile" path="/profile" />
+      <SEO title="Profile - SwiftCourt" description="Manage your SwiftCourt profile" path="/profile" />
       <BrandNav />
       
       <main className="container mx-auto px-4 pt-24 pb-8 max-w-6xl">

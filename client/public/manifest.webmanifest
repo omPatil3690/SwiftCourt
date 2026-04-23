@@ -1,6 +1,6 @@
 {
-  "name": "QuickCourt",
-  "short_name": "QuickCourt",
+  "name": "SwiftCourt",
+  "short_name": "SwiftCourt",
   "description": "Real-time sports court discovery & booking platform",
   "start_url": "/",
   "display": "standalone",

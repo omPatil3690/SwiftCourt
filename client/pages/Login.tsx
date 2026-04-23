@@ -21,6 +21,8 @@ const Login = () => {
 
   const from = location.state?.from?.pathname || '/';
   const isAdminLogin = new URLSearchParams(location.search).get('role') === 'admin';
+  const flashMessage =
+    typeof location.state?.message === 'string' ? location.state.message : null;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,13 +56,9 @@ const Login = () => {
     }
   };
 
-  const handleOTPLogin = () => {
-    navigate('/otp-login');
-  };
-
   return (
     <div className="min-h-screen bg-gray-50 flex">
-      <SEO title="Login - QuickCourt" description="Sign in to your QuickCourt account" path="/login" />
+      <SEO title="Login - SwiftCourt" description="Sign in to your SwiftCourt account" path="/login" />
       
       {/* Left Column - Background Image (Desktop Only) */}
       <motion.div 
@@ -152,7 +150,7 @@ const Login = () => {
               )}
 
               <h1 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">
-                {isAdminLogin ? 'Admin Portal Access' : 'Welcome Back to QuickCourt'}
+                {isAdminLogin ? 'Admin Portal Access' : 'Welcome Back to SwiftCourt'}
               </h1>
               <p className="text-gray-500 text-sm sm:text-base">
                 {isAdminLogin 
@@ -161,6 +159,12 @@ const Login = () => {
                 }
               </p>
             </div>
+
+            {flashMessage && (
+              <div className="mb-5 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700">
+                {flashMessage}
+              </div>
+            )}
 
             {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
@@ -220,7 +224,7 @@ const Login = () => {
               </div>
 
               {/* Remember Me & Forgot Password */}
-              <div className="flex items-center justify-between">
+              <div className="flex items-center">
                 <div className="flex items-center space-x-2">
                   <Checkbox
                     id="remember"
@@ -235,12 +239,6 @@ const Login = () => {
                     Remember me
                   </Label>
                 </div>
-                <Link
-                  to="/forgot-password"
-                  className="text-sm text-[#2ECC71] hover:text-[#27AE60] font-medium transition-colors"
-                >
-                  Forgot Password?
-                </Link>
               </div>
 
               {/* Login Button */}
@@ -258,31 +256,6 @@ const Login = () => {
                   disabled={isLoading}
                 >
                   {isLoading ? 'Signing in...' : (isAdminLogin ? 'Access Admin Portal' : 'Login')}
-                </Button>
-              </motion.div>
-
-              {/* Divider */}
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-gray-200" />
-                </div>
-                <div className="relative flex justify-center text-sm">
-                  <span className="px-4 bg-white text-gray-500">Or use alternative methods</span>
-                </div>
-              </div>
-
-              {/* OTP Login Button */}
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <Button
-                  type="button"
-                  variant="ghost"
-                  onClick={handleOTPLogin}
-                  className="w-full h-12 text-[#2ECC71] hover:text-[#27AE60] hover:bg-green-50 font-semibold rounded-lg transition-all duration-200"
-                >
-                  Login with OTP
                 </Button>
               </motion.div>
             </form>
