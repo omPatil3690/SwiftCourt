@@ -1,0 +1,290 @@
+// QuickCourt Prisma schema
+// PostgreSQL database
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum UserRole { 
+  USER
+  OWNER
+  ADMIN
+}
+
+enum UserStatus { 
+  ACTIVE
+  BANNED
+}
+
+enum FacilityStatus { 
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum BookingStatus { 
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+enum PaymentStatus { 
+  PENDING
+  SUCCEEDED
+  FAILED
+  REFUNDED
+}
+
+// Types of property/services an owner can list
+enum PropertyType {
+  PLAY
+  BOOK
+  TRAIN
+}
+
+model User {
+  id           String        @id @default(cuid())
+  email        String        @unique
+  passwordHash String
+  fullName     String
+  avatarUrl    String? 
+  role         UserRole      @default(USER)
+  status       UserStatus    @default(ACTIVE)
+  facilities   Facility[]    @relation("OwnerFacilities")
+  bookings     Booking[]
+  reviews      Review[]
+  refreshTokens RefreshToken[]
+  // Gamification & referrals
+  loyaltyPoints    Int           @default(0)
+  currentStreak    Int           @default(0)
+  lastActivityDate DateTime?
+  referralCode     String?       @unique
+  referredById     String?
+  referredBy       User?         @relation("UserReferrals", fields: [referredById], references: [id])
+  referrals        User[]        @relation("UserReferrals")
+  badges           UserBadge[]
+  pointsLedger     PointsLedger[]
+  referralRewards  ReferralReward[] @relation("ReferrerRewards")
+  earnedRewards    ReferralReward[] @relation("RefereeRewards")
+  sentInvites      BookingInvite[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  verificationTokens VerificationToken[]
+}
+
+model VerificationToken {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  otpHash   String
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime @default(now())
+  @@index([userId])
+}
+
+model Facility {
+  id          String          @id @default(cuid())
+  name        String
+  location    String
+  description String
+  sports      String[]
+  amenities   String[]
+  images      String[]
+  propertyTypes PropertyType[]
+  status      FacilityStatus  @default(PENDING)
+  owner       User            @relation("OwnerFacilities", fields: [ownerId], references: [id])
+  ownerId     String
+  courts      Court[]
+  reviews     Review[]
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  @@index([status])
+  @@index([ownerId])
+}
+
+model Court {
+  id          String    @id @default(cuid())
+  name        String
+  facility    Facility  @relation(fields: [facilityId], references: [id])
+  facilityId  String
+  pricePerHour Decimal   @db.Decimal(10,2)
+  openTime    Int        // minutes from midnight
+  closeTime   Int
+  bookings    Booking[]
+  maintenance MaintenanceBlock[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  @@index([facilityId])
+}
+
+model MaintenanceBlock {
+  id        String   @id @default(cuid())
+  court     Court    @relation(fields: [courtId], references: [id])
+  courtId   String
+  startTime DateTime
+  endTime   DateTime
+  reason    String?
+  createdAt DateTime @default(now())
+  @@index([courtId])
+  @@index([startTime,endTime])
+}
+
+model Booking {
+  id          String        @id @default(cuid())
+  user        User          @relation(fields: [userId], references: [id])
+  userId      String
+  court       Court         @relation(fields: [courtId], references: [id])
+  courtId     String
+  startTime   DateTime
+  endTime     DateTime
+  status      BookingStatus @default(PENDING)
+  price       Decimal       @db.Decimal(10,2)
+  payment     Payment?
+  invites     BookingInvite[]
+  shareLink   ShareableBookingLink?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  @@index([courtId,startTime,endTime])
+  @@index([userId])
+}
+
+model Payment {
+  id            String        @id @default(cuid())
+  booking       Booking       @relation(fields: [bookingId], references: [id])
+  bookingId     String        @unique
+  amount        Decimal       @db.Decimal(10,2)
+  provider      String
+  providerRef   String?
+  status        PaymentStatus @default(PENDING)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  @@index([status])
+}
+
+model RefreshToken {
+  id         String   @id @default(cuid())
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+  tokenHash  String
+  expiresAt  DateTime
+  revokedAt  DateTime?
+  createdAt  DateTime @default(now())
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model Review {
+  id         String   @id @default(cuid())
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+  facility   Facility @relation(fields: [facilityId], references: [id])
+  facilityId String
+  rating     Int      @db.SmallInt // 1-5 rating
+  comment    String?
+  sport      String?  // Which sport was reviewed
+  isVerified Boolean  @default(false) // Only reviews from users who actually booked
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  
+  @@unique([userId, facilityId]) // One review per user per facility
+  @@index([facilityId])
+  @@index([rating])
+  @@index([createdAt])
+}
+
+// Loyalty & Gamification Models
+
+model PointsLedger {
+  id           String   @id @default(cuid())
+  user         User     @relation(fields: [userId], references: [id])
+  userId       String
+  source       String   // e.g. BOOKING, REFERRAL, BONUS, ADJUST
+  delta        Int
+  balanceAfter Int
+  meta         Json?
+  createdAt    DateTime @default(now())
+  @@index([userId, createdAt])
+}
+
+model Badge {
+  id          String   @id @default(cuid())
+  code        String   @unique
+  name        String
+  description String?
+  criteria    Json?    // rule definition (e.g. {"totalBookings":10})
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  userBadges  UserBadge[]
+}
+
+model UserBadge {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  badge     Badge    @relation(fields: [badgeId], references: [id])
+  badgeId   String
+  earnedAt  DateTime @default(now())
+  @@unique([userId, badgeId])
+  @@index([userId])
+}
+
+enum InviteStatus {
+  PENDING
+  ACCEPTED
+  DECLINED
+  EXPIRED
+}
+
+model BookingInvite {
+  id           String       @id @default(cuid())
+  booking      Booking      @relation(fields: [bookingId], references: [id])
+  bookingId    String
+  inviter      User         @relation(fields: [inviterId], references: [id])
+  inviterId    String
+  inviteeEmail String
+  status       InviteStatus @default(PENDING)
+  token        String       @unique
+  expiresAt    DateTime
+  respondedAt  DateTime?
+  createdAt    DateTime     @default(now())
+  @@index([bookingId])
+  @@index([token])
+}
+
+model ShareableBookingLink {
+  id         String   @id @default(cuid())
+  booking    Booking  @relation(fields: [bookingId], references: [id])
+  bookingId  String   @unique
+  slug       String   @unique
+  expiresAt  DateTime?
+  accessLevel String  @default("VIEW")
+  createdAt  DateTime @default(now())
+  @@index([slug])
+}
+
+enum ReferralRewardStatus { 
+  PENDING 
+  EARNED 
+  REVOKED 
+}
+
+model ReferralReward {
+  id          String               @id @default(cuid())
+  referrer    User                 @relation("ReferrerRewards", fields: [referrerId], references: [id])
+  referrerId  String
+  referee     User                 @relation("RefereeRewards", fields: [refereeId], references: [id])
+  refereeId   String
+  status      ReferralRewardStatus @default(PENDING)
+  createdAt   DateTime             @default(now())
+  earnedAt    DateTime?
+  @@unique([referrerId, refereeId])
+  @@index([referrerId])
+  @@index([refereeId])
+  @@index([status])
+}

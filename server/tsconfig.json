@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es2019",
+    "lib": ["es2019"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "outDir": "./",
+    "resolveJsonModule": true,
+    "types": ["node"]
+  },
+  "include": ["src", "api"],
+  "exclude": ["node_modules", "dist"]
+}

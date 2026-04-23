@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QuickCourt – Real-time Sports Court Booking</title>
+    <meta name="description" content="Book local sports courts in real-time. Live slot availability, secure payments, and responsive UX." />
+    <meta name="author" content="QuickCourt" />
+    <link rel="canonical" href="/" />
+    <!-- Explicitly prevent favicon -->
+    <link rel="icon" href="data:,">
+    <meta property="og:title" content="QuickCourt – Real-time Sports Court Booking" />
+    <meta property="og:description" content="Book local sports courts in real-time. Live slot availability, secure payments, and responsive UX." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#0ea5e9" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "QuickCourt",
+        "url": "/",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "/venues?query={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/main.tsx"></script>
+  </body>
+</html>
