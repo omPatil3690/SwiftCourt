@@ -11,13 +11,24 @@ export class ApiError extends Error {
   }
 }
 
+function buildApiUrl(endpoint: string) {
+  const baseUrl = (API_BASE_URL || '').replace(/\/+$/, '');
+  const normalizedEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+
+  if (!baseUrl) {
+    return normalizedEndpoint;
+  }
+
+  return `${baseUrl}${normalizedEndpoint}`;
+}
+
 export async function apiRequest<T>(
   endpoint: string,
   options: RequestInit = {}
 ): Promise<T> {
   const token = localStorage.getItem('accessToken');
   
-  const fullUrl = `${API_BASE_URL}${endpoint}`;
+  const fullUrl = buildApiUrl(endpoint);
   // Debug: log the request URL
   if (endpoint.startsWith('/auth/login')) {
     // eslint-disable-next-line no-console
@@ -43,7 +54,7 @@ export async function apiRequest<T>(
           localStorage.setItem('refreshToken', refreshResponse.refreshToken);
           
           // Retry the original request with new token
-          const retryResponse = await fetch(`${API_BASE_URL}${endpoint}`, {
+          const retryResponse = await fetch(buildApiUrl(endpoint), {
             headers: {
               'Content-Type': 'application/json',
               Authorization: `Bearer ${refreshResponse.accessToken}`,

@@ -26,6 +26,14 @@ app.use(sentryRequestHandler);
 
 app.use(helmet());
 
+app.use((req, _res, next) => {
+  // Normalize duplicate slashes so Vercel and browsers do not hit a redirecting preflight.
+  if (req.url.includes('//')) {
+    req.url = req.url.replace(/\/+/g, '/');
+  }
+  next();
+});
+
 // Enhanced CORS configuration
 const corsOptions = {
   origin: function (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) {
@@ -64,7 +72,8 @@ const corsOptions = {
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
+  optionsSuccessStatus: 204,
 };
 
 app.use(cors(corsOptions));

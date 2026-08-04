@@ -25,23 +25,28 @@ if (missing.length) {
   process.exit(1);
 }
 
+const defaultCorsOrigins = [
+  'http://localhost:3000',
+  'http://localhost:5173',
+  'http://127.0.0.1:3000',
+  'http://127.0.0.1:5173',
+  'https://swift-court.vercel.app',
+  'https://www.swift-court.vercel.app',
+  'https://swift-court-8o8l.vercel.app'
+];
+
+const configuredCorsOrigins = (process.env.CORS_ORIGIN?.split(',') || [])
+  .map(origin => origin.trim())
+  .filter(Boolean);
+
 export const env = {
   nodeEnv: process.env.NODE_ENV || 'development',
   port: parseInt(process.env.PORT || '4000', 10),
   dbUrl: process.env.DATABASE_URL!,
-  // Allow multiple dev origins (vite default 5173, 8080/8081 variants, 3000) so front-end ports can vary
+  // Allow multiple dev origins and the deployed frontend origin in production.
   corsOrigin: process.env.NODE_ENV === 'development'
-    ? [
-        'http://localhost:5173',
-        'http://127.0.0.1:5173',
-        'http://localhost:8080',
-        'http://127.0.0.1:8080',
-        'http://localhost:8081',
-        'http://127.0.0.1:8081',
-        'http://localhost:3000',
-        'http://127.0.0.1:3000'
-      ]
-    : (process.env.CORS_ORIGIN?.split(',') || ['http://localhost:3000']),
+    ? defaultCorsOrigins
+    : Array.from(new Set([...configuredCorsOrigins, ...defaultCorsOrigins])),
   accessTokenSecret: process.env.ACCESS_TOKEN_SECRET!,
   refreshTokenSecret: process.env.REFRESH_TOKEN_SECRET!,
   accessTokenTtl: process.env.ACCESS_TOKEN_TTL || '15m',
