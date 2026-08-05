@@ -1,7 +1,7 @@
 // Prefer an explicit env var, otherwise default to the local API in development.
 export const API_BASE_URL =
   (import.meta as any).env?.VITE_API_BASE_URL ||
-  (import.meta.env.DEV ? 'http://localhost:4000' : 'https://quick-court-hlmu.vercel.app');
+  (import.meta.env.DEV ? 'http://localhost:4000' : 'https://swift-court-8o81.vercel.app');
 
 // API utility functions
 export class ApiError extends Error {
@@ -12,7 +12,12 @@ export class ApiError extends Error {
 }
 
 function buildApiUrl(endpoint: string) {
-  const baseUrl = (API_BASE_URL || '').replace(/\/+$/, '');
+  let baseUrl = (API_BASE_URL || '').replace(/\/+$/, '');
+  
+  if (baseUrl && !baseUrl.startsWith('http')) {
+    baseUrl = `https://${baseUrl}`;
+  }
+
   const normalizedEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
 
   if (!baseUrl) {
